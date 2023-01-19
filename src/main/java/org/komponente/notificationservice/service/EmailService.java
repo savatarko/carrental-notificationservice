@@ -1,13 +1,17 @@
 package org.komponente.notificationservice.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+import javax.jms.Session;
+import java.util.Properties;
+
+
 @Component
 public class EmailService {
-
     @Autowired
     public JavaMailSender mailSender;
 
@@ -17,6 +21,7 @@ public class EmailService {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
+
         mailSender.send(message);
     }
 }
