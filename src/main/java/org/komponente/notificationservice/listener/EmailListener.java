@@ -23,43 +23,43 @@ public class EmailListener {
     @JmsListener(destination = "newregistration", concurrency = "5-10")
     public void register(Message message) throws JMSException {
         RegisterNotification registerNotification = messageHelper.getMessage(message, RegisterNotification.class);
-        emailService.sendSimpleMessage(registerNotification.getEmail(), "Welcome to RAF car!", registerNotification.toString());
+        emailService.sendSimpleMessage(registerNotification.getEmail(), "Welcome to RAF car!", registerNotification.toString(), 1L, registerNotification.getReceiverId());
     }
 
     @JmsListener(destination = "changepassword", concurrency = "5-10")
     public void changePassword(Message message) throws JMSException {
         ChangePasswordNotification registerNotification = messageHelper.getMessage(message, ChangePasswordNotification.class);
-        emailService.sendSimpleMessage(registerNotification.getEmail(), "Confirm password change", registerNotification.toString());
+        emailService.sendSimpleMessage(registerNotification.getEmail(), "Confirm password change", registerNotification.toString(), 2L, registerNotification.getReceiverId());
     }
 
     @JmsListener(destination = "reminder", concurrency = "5-10")
     public void reservationReminder(Message message) throws JMSException{
         ReservationReminderNotification reservationReminderNotification = messageHelper.getMessage(message, ReservationReminderNotification.class);
-        emailService.sendSimpleMessage(reservationReminderNotification.getEmail(), "Reservation reminder", reservationReminderNotification.toString());
+        emailService.sendSimpleMessage(reservationReminderNotification.getEmail(), "Reservation reminder", reservationReminderNotification.toString(), 3L, reservationReminderNotification.getReceiverId());
     }
 
     @JmsListener(destination = "reservation", concurrency = "5-10")
     public void successfulReservationClient(Message message) throws JMSException{
         SuccessfulReservationClientNotification successfulReservationClientNotification = messageHelper.getMessage(message, SuccessfulReservationClientNotification.class);
-        emailService.sendSimpleMessage(successfulReservationClientNotification.getEmail(), "Successful registration", successfulReservationClientNotification.toString());
+        emailService.sendSimpleMessage(successfulReservationClientNotification.getEmail(), "Successful registration", successfulReservationClientNotification.toString(), 4L, successfulReservationClientNotification.getReceiverId());
     }
 
     @JmsListener(destination = "reservationmanager", concurrency = "5-10")
     public void successfulReservationManager(Message message) throws JMSException{
         SuccessfulReservationManagerNotification successfulReservationManagerNotification = messageHelper.getMessage(message, SuccessfulReservationManagerNotification.class);
-        emailService.sendSimpleMessage(successfulReservationManagerNotification.getEmail(), "Successful registration", successfulReservationManagerNotification.toString());
+        emailService.sendSimpleMessage(successfulReservationManagerNotification.getEmail(), "Successful registration", successfulReservationManagerNotification.toString(), 5L, successfulReservationManagerNotification.getReceiverId());
     }
 
     @JmsListener(destination = "cancelreservationclient", concurrency = "5-10")
     public void cancelReservationClient(Message message) throws JMSException{
         CancelReservationClientNotification cancelReservationClientNotification = messageHelper.getMessage(message, CancelReservationClientNotification.class);
-        emailService.sendSimpleMessage(cancelReservationClientNotification.getEmail(), "Reservation cancelled", cancelReservationClientNotification.toString());
+        emailService.sendSimpleMessage(cancelReservationClientNotification.getEmail(), "Reservation cancelled", cancelReservationClientNotification.toString(), 6L, cancelReservationClientNotification.getReceiverId());
 
     }
 
     @JmsListener(destination = "cancelreservationmanager", concurrency = "5-10")
     public void cancelReservationManager(Message message) throws JMSException{
         CancelReservationManagerNotification cancelReservationManagerNotification = messageHelper.getMessage(message, CancelReservationManagerNotification.class);
-        emailService.sendSimpleMessage(cancelReservationManagerNotification.getEmail(), "Reservation cancelled", cancelReservationManagerNotification.toString());
+        emailService.sendSimpleMessage(cancelReservationManagerNotification.getEmail(), "Reservation cancelled", cancelReservationManagerNotification.toString(), 7L, cancelReservationManagerNotification.getReceiverId());
     }
 }
